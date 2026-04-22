@@ -73,7 +73,12 @@ public static class WindowIconRenderer
         );
 
         // Build the geometry object that represents the text.
-        var textGeometry = formattedText.BuildGeometry(new Point(0, -30));
+        var textGeometry;
+        if (PlatformUtils.IsOSX)
+            textGeometry = formattedText.BuildGeometry(new Point(0, 0));
+        else
+            textGeometry = formattedText.BuildGeometry(new Point(0, -30));
+            
         var render = new RenderTargetBitmap(new PixelSize(256, 256), new Vector(96, 96));
 
         using (var ctx = render.CreateDrawingContext())
